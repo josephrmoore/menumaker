@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>untitled</title>
+		<meta name="generator" content="TextMate http://macromates.com/">
+		<meta name="author" content="Joseph Moore">
+		<meta name="description" content="">
+	  	<meta name="viewport" content="width=device-width">
+		<!-- Date: 2015-11-17 -->
+		<link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
+		<link rel="icon" href="favicon.ico" />
+		<!--[if lt IE 9]>
+			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+	  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+	       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+	  <!--[if lte IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+		<div id="wrapper">
+		    <form id="pool" action="">
+    		    <h1>Meals</h1>
+		        <ul class="meals">
+		            <li class="meals__meal">
+                        <h2 class="meals__meal_name" contenteditable></h2>
+                        <ul class="meals__meal_tags">
+                              <li class="meals__meal_tag" contenteditable></li>
+                              <!--repeat for all tags  -->
+                          </ul>
+                          <h2>Add tag</h2>
+                          <input id="meals__meal_tags_add" type="button" value="+" />
+		            </li>
+		            <!-- repeat for all meals -->
+		        </ul>
+		        <input id="meals__add" type="button" value="+" />
+		    </form>
+		    <form id="plan" action="">
+		        <h1>Plan</h1>
+		        <div class="weeks">
+		            <h2>Add weeks to plan</h2>
+		            <input id="weeks__current" type="number" />
+		            <input id="weeks__add" type="button" value="+" />
+		            <ul class="weeks__preview">
+		              <li class="weeks__week_1">
+		                  <h2>Week <span class="weeks__week_1_number">1</span></h2>
+		                  <ul class="days">
+		                      <li class="days__monday">
+		                          <h3 class="days__monday_day">Monday</h3>
+		                          <ul class="meals">
+		                              <li class="meals__breakfast">
+		                                  <h4 class="meals__breakfast_name" contenteditable>Breakfast</h4>
+                                          <div class="meals__breakfast_tags">
+        	                                  <h5>Tags</h5>
+          		                              <ul class="meals__breakfast_tags_list">
+          		                                  <li class="meals__breakfast_tag" contenteditable></li>
+          		                                  <!--repeat for all tags  -->
+          		                              </ul>
+          		                              <h5>Add tag</h5>
+          		                              <input id="meals__breakfast_tags_add" type="button" value="+" />
+                                          </div>
+                                          <div class="meals__breakfast_ingredients">
+        		                              <h5>Ingredients</h5>
+        		                              <ul class="meals__breakfast_ingredients_list">
+                                                  <li class="meals__breakfast_ingredient" contenteditable></li>
+                                                  <!-- repeat for all ingredients -->
+          		                              </ul>
+          		                              <h5>Add ingredient</h>
+          		                              <input id="meals__breakfast_ingredients_add" type="button" value="+" />
+          		                          </div>
+		                              </li>
+		                              <!-- repeat for all meals -->
+		                          </ul>
+		                      </li>
+		                      <!-- repeat for all days -->
+		                  </ul>
+		              </li>
+		              <!-- repeat for all weeks -->
+		            </ul>
+		        </div>
+		    </form>
+		</div>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	    <script src="menumaker.js"></script>
+	  	<!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID. -->
+	  	<script>
+	    	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+	    	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+	    	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+	    	s.parentNode.insertBefore(g,s)}(document,'script'));
+	  	</script>
+	</body>
+	<!--Copyright (c) 2015 . All rights reserved.-->
+</html>
