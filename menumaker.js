@@ -78,6 +78,7 @@ jQuery(document).ready(function($){
 				var plan_json = JSON.parse(data);
 				var html = renderPlan(plan_json);
 				$('#wrapper').append(html);
+				initializeControls();
 			}
 		});
 	}
@@ -96,7 +97,7 @@ jQuery(document).ready(function($){
 	
 	function renderPlan(json){
 		var number_weeks = json.length;
-		var html = '<form id="plan" action=""><h1>Plan</h1><div class="weeks"><h2>Add weeks to plan</h2><input id="weeks__current" type="number" value="'+ number_weeks +'" /><input id="weeks__add" type="button" value="+" />';
+		var html = '<form id="plan" action=""><h1>Plan</h1><div class="weeks"><h2><span id="weeks__current">'+number_weeks+'</span> weeks</h2><input id="weeks__add" type="button" value="Add weeks to plan" />';
 		for(var i=0; i<number_weeks; i++){
 			html += renderWeek(json[i], (i+1));
 		}
@@ -105,21 +106,21 @@ jQuery(document).ready(function($){
 	}
 	
 	function renderWeek(week_json, week_number){
-		var html = '<ul class="weeks__preview"><li class="weeks__week_'+ week_number +'"><h2>Week <span class="weeks__week_'+ week_number +'_number">'+ week_number +'</span></h2><ul class="days">';
+		var html = '<ul class="weeks__preview"><li class="weeks__week_'+ week_number +'"><h2>Week <span class="weeks__week_'+ week_number +'_number">'+ week_number +'</span></h2><ul class="days group">';
 		for(day in week_json){
 			html += renderDay(week_json[day], day);
 		}
-		html += '</ul></li><button class="">Remove Week</button></ul>';
+		html += '</ul><button class="weeks__close">Remove Week</button></li></ul>';
 		return html;
 	}
 	
 	function blankWeek(week_number){
-		var html = '<ul class="weeks__preview"><li class="weeks__week_'+ week_number +'"><h2>Week <span class="weeks__week_'+ week_number +'_number">'+ week_number +'</span></h2><ul class="days">';
+		var html = '<ul class="weeks__preview"><li class="weeks__week_'+ week_number +'"><h2>Week <span class="weeks__week_'+ week_number +'_number">'+ week_number +'</span></h2><ul class="days group">';
 		var days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
 		for(var i=0; i<days.length; i++){
 			html += blankDay(days[i]);
 		}
-		html += '</ul></li><button class="">Remove Week</button></ul>';
+		html += '</ul><button class="">Remove Week</button></li></ul>';
 		return html;
 		
 	}
@@ -150,15 +151,15 @@ jQuery(document).ready(function($){
 	
 	function renderMeal(meal_json, meal){
 		var meal_name = meal_json["meal"]["name"];
-		var html = '<li class="meals__'+ meal +'"><h4 class="meals__'+ meal +'_name" contenteditable>'+ meal.charAt(0).toUpperCase()+meal.slice(1) +'</h4><h5>'+meal_name+'</h5><div class="meals__'+ meal +'_tags"><h5>Tags</h5><ul class="meals__'+ meal +'_tags_list">';
+		var html = '<li class="meals__'+ meal +'"><h4 class="meals__'+ meal +'_name" contenteditable>'+ meal.charAt(0).toUpperCase()+meal.slice(1) +'</h4><h5>'+meal_name+'</h5><div class="meals__'+ meal +'_tags"><h5>Tags</h5><input class="meals__'+ meal +'_tags_add" type="button" value="Add tag" /><ul class="meals__'+ meal +'_tags_list">';
 		for(var i=0; i<meal_json["tags"].length; i++){
 			html += renderTag(meal_json["tags"][i], meal);
 		}
-		html = html+'</ul><h5>Add tag</h5><input id="meals__'+ meal +'_tags_add" type="button" value="+" /></div><div class="meals__'+ meal +'_ingredients"><h5>Ingredients</h5><ul class="meals__'+ meal +'_ingredients_list">';
+		html = html+'</ul></div><div class="meals__'+ meal +'_ingredients"><h5>Ingredients</h5><input class="meals__'+ meal +'_ingredients_add" type="button" value="Add ingredient" /><ul class="meals__'+ meal +'_ingredients_list">';
 		for(var i=0; i<meal_json["ingredients"].length; i++){
 			html += renderIngredient(meal_json["ingredients"][i], meal);
 		}
-		html = html+'</ul><h5>Add ingredient</h5><input id="meals__'+ meal +'_ingredients_add" type="button" value="+" /></div><button class="meals__'+meal+'_close">Remove Meal</button></li>';
+		html = html+'</ul></div><button class="meals__'+meal+'_close">Remove Meal</button></li>';
 		return html;
 	}
 	
@@ -188,6 +189,31 @@ jQuery(document).ready(function($){
 		// 	        <input id="meals__add" type="button" value="+" />
 		// 	    </form>';
 		// return html;
+	}
+	
+	function initializeControls(){
+		$(".meals__breakfast_tag_close").click(function(e){console.log(e); return false; });
+		$(".meals__lunch_tag_close").click(function(e){console.log(e); return false; });
+		$(".meals__snack_tag_close").click(function(e){console.log(e); return false; });
+		$(".meals__dinner_tag_close").click(function(e){console.log(e); return false; });
+		$(".meals__breakfast_tags_add").click(function(e){console.log(e); return false; });
+		$(".meals__lunch_tags_add").click(function(e){console.log(e); return false; });
+		$(".meals__snack_tags_add").click(function(e){console.log(e); return false; });
+		$(".meals__dinner_tags_add").click(function(e){console.log(e); return false; });
+		$(".meals__breakfast_ingredient_close").click(function(e){console.log(e); return false; });
+		$(".meals__lunch_ingredient_close").click(function(e){console.log(e); return false; });
+		$(".meals__snack_ingredient_close").click(function(e){console.log(e); return false; });
+		$(".meals__dinner_ingredient_close").click(function(e){console.log(e); return false; });
+		$(".meals__breakfast_ingredients_add").click(function(e){console.log(e); return false; });
+		$(".meals__lunch_ingredients_add").click(function(e){console.log(e); return false; });
+		$(".meals__snack_ingredients_add").click(function(e){console.log(e); return false; });
+		$(".meals__dinner_ingredients_add").click(function(e){console.log(e); return false; });
+		$(".meals__breakfast_close").click(function(e){console.log(e); return false; });
+		$(".meals__lunch_close").click(function(e){console.log(e); return false; });
+		$(".meals__snack_close").click(function(e){console.log(e); return false; });
+		$(".meals__dinner_close").click(function(e){console.log(e); return false; });
+		$("#weeks__add").click(function(e){console.log(e); return false; });
+		$(".weeks__close").click(function(e){console.log(e); return false; });
 	}
 	
 	getPlan(1);

@@ -1,0 +1,126 @@
+/* Reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+  outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+  text-decoration: none;
+}
+del {
+  text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+article,aside,canvas,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section,summary, video {
+  display:block;
+}
+
+
+
+
+
+/* Turning off elements */
+
+.off {
+	display:none;
+}
+
+/* Clearing Floats */
+
+.group:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+* html .group             { zoom: 1; } /* IE6 */
+*:first-child+html .group { zoom: 1; } /* IE7 */
+
+.days {
+	width: 100%;
+}
+
+.days__monday, .days__tuesday, .days__wednesday, .days__thursday, .days__friday, .days__saturday, .days__sunday {
+	width: 14%;
+	float: left;
+	border: 1px solid #000;
+}
+
+.days__monday_day, .days__tuesday_day, .days__wednesday_day, .days__thursday_day, .days__friday_day, .days__saturday_day, .days__sunday_day {
+	background: #000;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+	font-family: Helvetica, Arial, sans-serif;
+	padding: 3px 0;
+}
+
+.meals__breakfast_name, .meals__lunch_name, .meals__snack_name, .meals__dinner_name {
+	text-align: center;
+	background: yellow;
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight: bold;
+}
+
+h5 {
+	float: left;
+	margin-right: 5px;	
+}
+
+.weeks__close {
+	clear: both;
+}
+
+button, input[type="button"] {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 9px;
+	background: gray;
+	color: #fff;
+	padding: 2px 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+}
