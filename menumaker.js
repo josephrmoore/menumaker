@@ -151,11 +151,11 @@ jQuery(document).ready(function($){
 	
 	function renderMeal(meal_json, meal){
 		var meal_name = meal_json["meal"]["name"];
-		var html = '<li class="meals__'+ meal +'"><h4 class="meals__'+ meal +'_name" contenteditable>'+ meal.charAt(0).toUpperCase()+meal.slice(1) +'</h4><h5>'+meal_name+'</h5><div class="meals__'+ meal +'_tags"><h5>Tags</h5><input class="meals__'+ meal +'_tags_add" type="button" value="Add tag" /><ul class="meals__'+ meal +'_tags_list">';
+		var html = '<li class="meals__'+ meal +'"><h4 class="meals__'+ meal +'_name">'+ meal.charAt(0).toUpperCase()+meal.slice(1) +'</h4><h5 contenteditable>'+meal_name+'</h5><div class="meals__'+ meal +'_tags"><h6>Tags</h6><input class="meals__'+ meal +'_tags_add" type="button" value="Add tag" /><ul class="meals__'+ meal +'_tags_list">';
 		for(var i=0; i<meal_json["tags"].length; i++){
 			html += renderTag(meal_json["tags"][i], meal);
 		}
-		html = html+'</ul></div><div class="meals__'+ meal +'_ingredients"><h5>Ingredients</h5><input class="meals__'+ meal +'_ingredients_add" type="button" value="Add ingredient" /><ul class="meals__'+ meal +'_ingredients_list">';
+		html = html+'</ul></div><div class="meals__'+ meal +'_ingredients"><h6>Ingredients</h6><input class="meals__'+ meal +'_ingredients_add" type="button" value="Add ingredient" /><ul class="meals__'+ meal +'_ingredients_list">';
 		for(var i=0; i<meal_json["ingredients"].length; i++){
 			html += renderIngredient(meal_json["ingredients"][i], meal);
 		}
@@ -164,11 +164,11 @@ jQuery(document).ready(function($){
 	}
 	
 	function renderTag(tag_json, meal){
-		return '<li class="meals__'+ meal +'_tag" contenteditable><span class="meals__'+ meal + '_tag_name">' + tag_json["name"] +'</span><button class="meals__'+ meal +'_tag_close">Delete tag</button></li>'
+		return '<li class="meals__'+ meal +'_tag"><span class="meals__'+ meal + '_tag_name" contenteditable>' + tag_json["name"] +'</span><button class="meals__'+ meal +'_tag_close">Delete tag</button></li>'
 	}
 	
 	function renderIngredient(ingredient_json, meal){
-		return '<li class="meals__'+ meal +'_ingredient" contenteditable><span class="meals__'+ meal + '_ingredient_name">' + ingredient_json["name"] +'</span><button class="meals__'+ meal +'_ingredient_close">Delete Ingredient</button></li>';
+		return '<li class="meals__'+ meal +'_ingredient"><span class="meals__'+ meal + '_ingredient_name" contenteditable>' + ingredient_json["name"] +'</span><button class="meals__'+ meal +'_ingredient_close">Delete Ingredient</button></li>';
 	}
 	
 	function renderMeals(json){
