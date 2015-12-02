@@ -70,6 +70,28 @@ jQuery(document).ready(function($){
 			}
 		});	
 	}
+	function addTag(name, meal_id, form){
+		$.ajax({
+			type:"POST",
+			url:"php/addtag.php",
+			data: {"name" : name, "meal_id" : meal_id},
+			success:function(data){
+				console.log(data);
+				form.addClass("off");
+			}
+		});	
+	}
+	function addIngredient(name, meal_id, form){
+		$.ajax({
+			type:"POST",
+			url:"php/addingredient.php",
+			data: {"name" : name, "meal_id" : meal_id},
+			success:function(data){
+				console.log(data);
+				form.addClass("off");
+			}
+		});	
+	}
 	function getPlan(plan_id){
 		$.ajax({
 			type:"GET",
@@ -151,7 +173,7 @@ jQuery(document).ready(function($){
 	
 	function renderMeal(meal_json, meal){
 		var meal_name = meal_json["meal"]["name"];
-		var html = '<li class="meals__'+ meal +'"><h4 class="meals__'+ meal +'_name">'+ meal.charAt(0).toUpperCase()+meal.slice(1) +'</h4><h5 contenteditable>'+meal_name+'</h5><div class="meals__'+ meal +'_tags"><h6>Tags</h6><input class="meals__'+ meal +'_tags_add" type="button" value="Add tag" /><ul class="meals__'+ meal +'_tags_list">';
+		var html = '<li class="meals__'+ meal +'" data-id="'+meal_json["meal"]["id"]+'"><h4 class="meals__'+ meal +'_name">'+ meal.charAt(0).toUpperCase()+meal.slice(1) +'</h4><h5 contenteditable>'+meal_name+'</h5><div class="meals__'+ meal +'_tags"><h6>Tags</h6><input class="meals__'+ meal +'_tags_add" type="button" value="Add tag" /><ul class="meals__'+ meal +'_tags_list">';
 		for(var i=0; i<meal_json["tags"].length; i++){
 			html += renderTag(meal_json["tags"][i], meal);
 		}
@@ -159,7 +181,7 @@ jQuery(document).ready(function($){
 		for(var i=0; i<meal_json["ingredients"].length; i++){
 			html += renderIngredient(meal_json["ingredients"][i], meal);
 		}
-		html = html+'</ul></div><button class="meals__'+meal+'_close">Remove Meal</button></li>';
+		html = html+'</ul><div class="meals__'+ meal +'_tag_input off"><span class="meals__'+ meal + '_tag_name" contenteditable></span><button class="meals__'+ meal +'_tag_input_save">Add Tag</button></div><div class="meals__'+ meal +'_ingredient_input off"><span class="meals__'+ meal + '_ingredient_name" contenteditable></span><button class="meals__'+ meal +'_ingredient_input_save">Add Ingredient</button></div><button class="meals__'+meal+'_close">Clear Meal</button></li>';
 		return html;
 	}
 	
@@ -196,24 +218,100 @@ jQuery(document).ready(function($){
 		$(".meals__lunch_tag_close").click(function(e){console.log(e); return false; });
 		$(".meals__snack_tag_close").click(function(e){console.log(e); return false; });
 		$(".meals__dinner_tag_close").click(function(e){console.log(e); return false; });
-		$(".meals__breakfast_tags_add").click(function(e){console.log(e); return false; });
-		$(".meals__lunch_tags_add").click(function(e){console.log(e); return false; });
-		$(".meals__snack_tags_add").click(function(e){console.log(e); return false; });
-		$(".meals__dinner_tags_add").click(function(e){console.log(e); return false; });
+		$(".meals__breakfast_tags_add").click(function(e){
+			console.log(e); 
+			$(this).parent().parent().find(".meals__breakfast_tag_input").removeClass("off");
+			return false; 
+		});
+		$(".meals__lunch_tags_add").click(function(e){
+			console.log(e);
+			$(this).parent().parent().find(".meals__lunch_tag_input").removeClass("off");
+			return false; 
+		});
+		$(".meals__snack_tags_add").click(function(e){
+			console.log(e); 
+			$(this).parent().parent().find(".meals__snack_tag_input").removeClass("off");
+			return false; 
+		});
+		$(".meals__dinner_tags_add").click(function(e){
+			console.log(e);
+			$(this).parent().parent().find(".meals__dinner_tag_input").removeClass("off");
+			return false; 
+		});
 		$(".meals__breakfast_ingredient_close").click(function(e){console.log(e); return false; });
 		$(".meals__lunch_ingredient_close").click(function(e){console.log(e); return false; });
 		$(".meals__snack_ingredient_close").click(function(e){console.log(e); return false; });
 		$(".meals__dinner_ingredient_close").click(function(e){console.log(e); return false; });
-		$(".meals__breakfast_ingredients_add").click(function(e){console.log(e); return false; });
-		$(".meals__lunch_ingredients_add").click(function(e){console.log(e); return false; });
-		$(".meals__snack_ingredients_add").click(function(e){console.log(e); return false; });
-		$(".meals__dinner_ingredients_add").click(function(e){console.log(e); return false; });
+		$(".meals__breakfast_ingredients_add").click(function(e){
+			console.log(e);
+			$(this).parent().parent().find(".meals__breakfast_ingredient_input").removeClass("off");
+			return false;
+		});
+		$(".meals__lunch_ingredients_add").click(function(e){
+			console.log(e);
+			$(this).parent().parent().find(".meals__lunch_ingredient_input").removeClass("off");
+			return false;
+		});
+		$(".meals__snack_ingredients_add").click(function(e){
+			console.log(e);
+			$(this).parent().parent().find(".meals__snack_ingredient_input").removeClass("off");
+			return false;
+		});
+		$(".meals__dinner_ingredients_add").click(function(e){
+			console.log(e);
+			$(this).parent().parent().find(".meals__dinner_ingredient_input").removeClass("off");
+			return false;
+		});
 		$(".meals__breakfast_close").click(function(e){console.log(e); return false; });
 		$(".meals__lunch_close").click(function(e){console.log(e); return false; });
 		$(".meals__snack_close").click(function(e){console.log(e); return false; });
 		$(".meals__dinner_close").click(function(e){console.log(e); return false; });
 		$("#weeks__add").click(function(e){console.log(e); return false; });
 		$(".weeks__close").click(function(e){console.log(e); return false; });
+		$(".meals__breakfast_ingredient_input_save").click(function(e){
+			console.log(e);
+			addIngredient($(this).parent().find(".meals__breakfast_ingredient_name").text(), $(this).parent().parent().parent().attr("data-id"), $(this).parent());
+			return false;
+		});
+		$(".meals__lunch_ingredient_input_save").click(function(e){
+			console.log(e);
+			addIngredient($(this).parent().find(".meals__breakfast_ingredient_name").text(), $(this).parent().parent().parent().attr("data-id"), $(this).parent());
+			return false;
+		});
+		$(".meals__snack_ingredient_input_save").click(function(e){
+			console.log(e);
+			addIngredient($(this).parent().find(".meals__lunch_ingredient_name").text(), $(this).parent().parent().parent().attr("data-id"), $(this).parent());
+			return false;
+		});
+		$(".meals__dinner_ingredient_input_save").click(function(e){
+			console.log(e);
+			addIngredient($(this).parent().find(".meals__dinner_ingredient_name").text(), $(this).parent().parent().parent().attr("data-id"), $(this).parent());
+			return false;
+		});
+
+		$(".meals__breakfast_tag_input_save").click(function(e){
+			console.log(e);
+			addTag($(this).parent().find(".meals__breakfast_tag_name").text(), $(this).parent().parent().parent().attr("data-id"), $(this).parent());
+			return false;
+		});
+
+		$(".meals__lunch_tag_input_save").click(function(e){
+			console.log(e);
+			addTag($(this).parent().find(".meals__lunch_tag_name").text(), $(this).parent().parent().parent().attr("data-id"), $(this).parent());
+			return false;
+		});
+
+		$(".meals__snack_tag_input_save").click(function(e){
+			console.log(e);
+			addTag($(this).parent().find(".meals__snack_tag_name").text(), $(this).parent().parent().parent().attr("data-id"), $(this).parent());
+			return false;
+		});
+
+		$(".meals__dinner_tag_input_save").click(function(e){
+			console.log(e);
+			addTag($(this).parent().find(".meals__dinner_tag_name").text(), $(this).parent().parent().parent().attr("data-id"), $(this).parent());
+			return false;
+		});
 	}
 	
 	getPlan(1);

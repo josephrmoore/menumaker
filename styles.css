@@ -105,6 +105,20 @@ footer,header,hgroup,menu,nav,section,summary, video {
 	font-weight: bold;
 }
 
+.meals__breakfast_tag_input .meals__breakfast_tag_name, .meals__lunch_tag_input .meals__lunch_tag_name, .meals__snack_tag_input .meals__snack_tag_name, .meals__dinner_tag_input .meals__dinner_tag_name {
+	width: 100px;
+	height: 15px;
+	border: 1px solid gray;
+	display: inline-block;
+}
+
+.meals__breakfast_ingredient_input .meals__breakfast_ingredient_name, .meals__lunch_ingredient_input .meals__lunch_ingredient_name, .meals__snack_ingredient_input .meals__snack_ingredient_name, .meals__dinner_ingredient_input .meals__dinner_ingredient_name {
+	width: 100px;
+	height: 15px;
+	border: 1px solid gray;
+	display: inline-block;
+}
+
 h6 {
 	float: left;
 	margin-right: 5px;	
